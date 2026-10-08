@@ -31,8 +31,18 @@
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
-try{if(localStorage.getItem('vision_cookies')==='aceito'){gtag('consent','update',{analytics_storage:'granted'});}}catch(e){}
+try{var vc=localStorage.getItem('vision_cookies');if(vc==='aceito'||vc==='aceito2'){gtag('consent','update',{analytics_storage:'granted'});}}catch(e){}
 gtag('js',new Date());gtag('config','G-HK6PS5T0KH');
+</script>
+<!-- Meta Pixel: desligado enquanto VISION_PIXEL estiver vazio; só carrega depois que o visitante aceita os cookies ("aceito2" = aceite que já cita anúncios) -->
+<script>
+var VISION_PIXEL='';
+function visionPixel(){
+  if(!VISION_PIXEL||window.fbq)return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init',VISION_PIXEL);fbq('track','PageView');
+}
+try{if(localStorage.getItem('vision_cookies')==='aceito2'){visionPixel();}}catch(e){}
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HK6PS5T0KH"></script>
 <style>
@@ -624,8 +634,16 @@ footer{padding:0}
 (function(){
   var c=document.getElementById('ck'),k='vision_cookies',v=null;
   try{v=localStorage.getItem(k);}catch(e){}
-  if(!v)c.hidden=false;
-  function escolhe(s){try{localStorage.setItem(k,s);}catch(e){}if(s==='aceito'){gtag('consent','update',{analytics_storage:'granted'});}c.hidden=true;}
+  // quem aceitou antes do pixel ("aceito") vê o aviso de novo quando o pixel for ligado
+  if(!v||(v==='aceito'&&VISION_PIXEL))c.hidden=false;
+  function escolhe(s){
+    if(s==='aceito'&&VISION_PIXEL)s='aceito2';
+    try{localStorage.setItem(k,s);}catch(e){}
+    if(s!=='recusado'){gtag('consent','update',{analytics_storage:'granted'});visionPixel();}
+    c.hidden=true;
+  }
+  // clique no WhatsApp conta como "Contato" nos anúncios (só se o pixel estiver ativo)
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="api.whatsapp"]');if(a&&window.fbq)fbq('track','Contact');});
   document.getElementById('ck-ok').addEventListener('click',function(){escolhe('aceito');});
   document.getElementById('ck-no').addEventListener('click',function(){escolhe('recusado');});
 })();
