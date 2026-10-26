@@ -643,13 +643,18 @@ html,body{height:100%}
     var inp=qs[i].querySelector('input');if(inp&&window.innerWidth>700)inp.focus();
   }
   function enviar(){
-    var linhas=['Olá! Fiz o diagnóstico pelo site e quero a conversa de 10 minutos.',''];
+    var linhas=['Olá! Fiz o diagnóstico pelo site e quero a conversa de 10 minutos.','','*MEUS DADOS*'];
     linhas.push('Nome: '+val('q-nome'),'WhatsApp: '+val('q-zap'),'Empresa: '+val('q-emp'));
     if(val('q-insta'))linhas.push('Instagram: '+val('q-insta'));
+    linhas.push('','*MINHAS RESPOSTAS*');
+    var n=0;
     qs.forEach(function(q){
       var c=q.getAttribute('data-campo');if(!c)return;
       var m=[];q.querySelectorAll('.op[aria-pressed="true"]').forEach(function(b){m.push(b.textContent.trim());});
-      if(m.length)linhas.push(c+': '+m.join(', '));
+      n++;
+      linhas.push('',n+'. '+c);
+      if(!m.length)linhas.push('   (sem resposta)');
+      m.forEach(function(r){linhas.push('   • '+r);});
     });
     var url='https://wa.me/5551997830110?text='+encodeURIComponent(linhas.join('\n'));
     document.getElementById('q-link').href=url;
