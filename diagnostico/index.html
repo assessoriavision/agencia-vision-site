@@ -595,12 +595,14 @@ html,body{height:100%}
 
     <section class="q" data-tipo="empresa">
       <h2>Sobre a sua <span class="o">empresa</span></h2>
-      <p class="q-s">Com o Instagram, a gente já chega na conversa tendo olhado o seu perfil.</p>
+      <p class="q-s">Com o Instagram e o site, a gente já chega na conversa tendo olhado tudo.</p>
       <div class="campos">
         <label for="q-emp">Nome da empresa</label>
         <input id="q-emp" type="text" autocomplete="organization" placeholder="Como o cliente conhece a sua empresa">
         <label for="q-insta">Instagram da empresa <small>(se tiver)</small></label>
         <input id="q-insta" type="text" autocomplete="off" placeholder="@suaempresa">
+        <label for="q-site">Site da empresa <small>(se tiver)</small></label>
+        <input id="q-site" type="text" inputmode="url" autocomplete="url" placeholder="www.suaempresa.com.br">
       </div>
       <p class="erro" aria-live="polite"></p>
     </section>
@@ -646,6 +648,7 @@ html,body{height:100%}
     var linhas=['Olá! Fiz o diagnóstico pelo site e quero a conversa de 10 minutos.','','*MEUS DADOS*'];
     linhas.push('Nome: '+val('q-nome'),'WhatsApp: '+val('q-zap'),'Empresa: '+val('q-emp'));
     if(val('q-insta'))linhas.push('Instagram: '+val('q-insta'));
+    linhas.push('Site: '+(val('q-site')||'não tenho'));
     linhas.push('','*MINHAS RESPOSTAS*');
     var n=0;
     qs.forEach(function(q){
