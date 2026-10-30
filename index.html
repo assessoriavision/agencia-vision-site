@@ -137,7 +137,7 @@ radial-gradient(140% 120% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%),var(-
 .hero .sub{margin-left:auto;margin-right:auto}
 .hero .cta-row{justify-content:center}
 .hero-socios{display:flex;justify-content:center;gap:0;margin:40px auto -8px;max-width:460px}
-.hero-socios .hs{position:relative;width:50%;max-width:100%;isolation:isolate}.hero-socios .hs::before{content:"";position:absolute;inset:0 -12% 0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,3,3,0) 0,rgba(3,3,3,.8) 35%,rgba(3,3,3,.96) 70%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%)}.hero-socios img{display:block;width:100%;height:auto}.hero-socios .ft{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 30%);mask-composite:intersect}.hero-socios .cab{position:absolute;inset:0;height:100%;-webkit-mask-image:linear-gradient(180deg,#000 48%,transparent 66%);mask-image:linear-gradient(180deg,#000 48%,transparent 66%)}
+.hero-socios .hs{position:relative;width:50%;max-width:100%;isolation:isolate}.hero-socios img{display:block;width:100%;height:auto}.hero-socios .ft{-webkit-mask-image:radial-gradient(ellipse 52% 78% at 50% 40%,#000 64%,transparent 100%);mask-image:radial-gradient(ellipse 52% 78% at 50% 40%,#000 64%,transparent 100%)}.hero-socios .cab{position:absolute;inset:0;height:100%;-webkit-mask-image:linear-gradient(180deg,#000 48%,transparent 66%);mask-image:linear-gradient(180deg,#000 48%,transparent 66%)}
 .hero-faixa{position:relative;z-index:2;margin-top:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(5,5,5,.88);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .hf-trilho{display:flex;width:max-content;animation:faixa 40s linear infinite}
 .hf-grupo{display:flex;align-items:center;flex:none}
@@ -163,6 +163,8 @@ radial-gradient(140% 120% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%),var(-
   .hero-socios .hs-a{right:max(0px,calc(50% - 980px))}
 }
 @media(min-width:1180px){.hero-socios{top:0;bottom:86px}.hero-socios .hs{height:min(92%,660px)}}
+/* PC: laterais do topo no preto do site, pra as fotos não ficarem em cima das linhas e do brilho laranja (linhas só no meio, atrás do título) */
+@media(min-width:1180px){.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,#050505 0,rgba(5,5,5,.97) 18%,rgba(5,5,5,.6) 30%,transparent 40%,transparent 60%,rgba(5,5,5,.6) 70%,rgba(5,5,5,.97) 82%,#050505 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 26%);mask-image:linear-gradient(180deg,transparent 0,#000 26%)}.hero .wrap{position:relative;z-index:1}}
 .pillars{display:flex;gap:28px;flex-wrap:wrap;margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--display);font-style:normal;font-weight:400;font-size:1.3rem;letter-spacing:.06em;color:var(--text)}
 .pillars b{color:var(--orange);font-weight:400}
 
