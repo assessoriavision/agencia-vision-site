@@ -446,6 +446,12 @@ header .nav>.btn{border-radius:999px;padding:18px 30px;text-transform:uppercase;
 /* fotos maiores no celular */
 @media(max-width:1179px){.hero-socios{max-width:none;margin:36px -16px 0}.hero-socios .hs{width:50%}}
 @media(max-width:560px){.hero-socios{margin:28px -16px 0}.hero-socios .hs{width:56%;flex:none}.hero-socios .hs-b{margin-right:-6%}.hero-socios .hs-a{margin-left:-6%}}
+/* botão Quem somos sobre as fotos (só celular e tablet) */
+.hs-btn{display:none}
+@media(max-width:1179px){
+  .hero-socios{position:relative}
+  .hs-btn{display:inline-flex;position:absolute;z-index:3;left:50%;bottom:22%;transform:translateX(-50%);white-space:nowrap;align-items:center;padding:13px 24px;border-radius:999px;background:rgba(5,5,5,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--orange);color:var(--text);text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 8px 26px rgba(255,102,0,.35)}
+}
 </style>
 </head>
 <body>
@@ -480,7 +486,8 @@ header .nav>.btn{border-radius:999px;padding:18px 30px;text-transform:uppercase;
         <a class="btn ghost" href="https://wa.me/5551997830110?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Vision%20e%20quero%20saber%20mais." target="_blank" rel="noopener">Falar no WhatsApp</a>
       </div>
     </div>
-    <div class="hero-socios" aria-hidden="true">
+    <div class="hero-socios">
+      <a class="hs-btn" href="/quem-somos/">Quem somos →</a>
       <div class="hs hs-b"><img class="ft" src="/socios/bruno.jpg?v=hd" alt="" width="1122" height="1402"><img class="cab" src="/socios/bruno-recorte.webp?v=hd2" alt="" width="1122" height="1402"></div>
       <div class="hs hs-a"><img class="ft" src="/socios/arthur.jpg?v=hd" alt="" width="1122" height="1402"><img class="cab" src="/socios/arthur-recorte.webp?v=hd2" alt="" width="1122" height="1402"></div>
     </div>
