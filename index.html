@@ -137,7 +137,7 @@ radial-gradient(140% 120% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%),var(-
 .hero .sub{margin-left:auto;margin-right:auto}
 .hero .cta-row{justify-content:center}
 .hero-socios{display:flex;justify-content:center;gap:0;margin:40px auto -8px;max-width:460px}
-.hero-socios .hs{position:relative;width:50%;max-width:100%}.hero-socios img{display:block;width:100%;height:auto}.hero-socios .ft{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 30%);mask-composite:intersect}.hero-socios .cab{position:absolute;inset:0;height:100%;-webkit-mask-image:linear-gradient(180deg,#000 48%,transparent 66%);mask-image:linear-gradient(180deg,#000 48%,transparent 66%)}
+.hero-socios .hs{position:relative;width:50%;max-width:100%;isolation:isolate}.hero-socios .hs::before{content:"";position:absolute;inset:0 -12% 0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(3,3,3,0) 0,rgba(3,3,3,.8) 35%,rgba(3,3,3,.96) 70%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%)}.hero-socios img{display:block;width:100%;height:auto}.hero-socios .ft{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 30%);mask-composite:intersect}.hero-socios .cab{position:absolute;inset:0;height:100%;-webkit-mask-image:linear-gradient(180deg,#000 48%,transparent 66%);mask-image:linear-gradient(180deg,#000 48%,transparent 66%)}
 .hero-faixa{position:relative;z-index:2;margin-top:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(5,5,5,.88);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .hf-trilho{display:flex;width:max-content;animation:faixa 40s linear infinite}
 .hf-grupo{display:flex;align-items:center;flex:none}
@@ -452,10 +452,7 @@ header .nav>.btn{border-radius:999px;padding:18px 30px;text-transform:uppercase;
   .hero-socios{position:relative}
   .hs-btn{display:inline-flex;position:absolute;z-index:3;left:50%;bottom:22%;transform:translateX(-50%);white-space:nowrap;align-items:center;padding:13px 24px;border-radius:999px;background:rgba(5,5,5,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--orange);color:var(--text);text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 8px 26px rgba(255,102,0,.35)}
 }
-/* Arthur com o mesmo tamanho de cabeça do Bruno */
-.hero-socios .hs-a{transform:scale(.9);transform-origin:50% 100%}
-/* celular: Arthur alinhado pela cabeça com o Bruno */
-@media(max-width:1179px){.hero-socios .hs-a{transform-origin:50% 7%}}
+/* Arthur: o enquadramento já vem igualado ao do Bruno na própria imagem (arthur-*-alinhado.webp) */
 </style>
 </head>
 <body>
@@ -493,7 +490,7 @@ header .nav>.btn{border-radius:999px;padding:18px 30px;text-transform:uppercase;
     <div class="hero-socios">
       <a class="hs-btn" href="/quem-somos/">Quem somos →</a>
       <div class="hs hs-b"><img class="ft" src="/socios/bruno-sem-fundo.webp?v=sf1" alt="" width="1122" height="1402"><img class="cab" src="/socios/bruno-recorte.webp?v=hd3" alt="" width="1122" height="1402"></div>
-      <div class="hs hs-a"><img class="ft" src="/socios/arthur-sem-fundo.webp?v=sf1" alt="" width="1122" height="1402"><img class="cab" src="/socios/arthur-recorte.webp?v=hd2" alt="" width="1122" height="1402"></div>
+      <div class="hs hs-a"><img class="ft" src="/socios/arthur-sem-fundo-alinhado.webp?v=al1" alt="" width="1122" height="1402"><img class="cab" src="/socios/arthur-recorte-alinhado.webp?v=al1" alt="" width="1122" height="1402"></div>
     </div>
     <div class="hero-faixa" aria-hidden="true"><div class="hf-trilho"><div class="hf-grupo"><span>A assessoria que trabalha <b>lado a lado</b> com o dono da empresa</span><i></i><span>A assessoria que trabalha <b>lado a lado</b> com o dono da empresa</span><i></i><span>A assessoria que trabalha <b>lado a lado</b> com o dono da empresa</span><i></i></div><div class="hf-grupo"><span>A assessoria que trabalha <b>lado a lado</b> com o dono da empresa</span><i></i><span>A assessoria que trabalha <b>lado a lado</b> com o dono da empresa</span><i></i><span>A assessoria que trabalha <b>lado a lado</b> com o dono da empresa</span><i></i></div></div></div>
   </div>
