@@ -55,6 +55,42 @@ try{if(localStorage.getItem('vision_cookies')==='aceito2'){visionPixel();}}catch
 #ck .ck-bt .ck-ok{background:#ff6600;color:#fff}
 #ck .ck-bt .ck-no{background:transparent;color:#eee;border:1px solid #555}
 @media (max-width:640px){.ck{left:12px;right:12px;max-width:none;bottom:calc(80px + env(safe-area-inset-bottom,0px))}}
+/* cases: carrossel com setas (1 slide por case + slide final de chamada) */
+#case .wrap{max-width:1120px}
+#case h2{margin-top:14px}
+.cs-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.cs-nav{display:flex;gap:10px}
+.cs-nav button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);font-size:1.6rem;line-height:1;cursor:pointer;transition:border-color .15s,background .15s,opacity .15s}
+.cs-nav button:hover{border-color:var(--orange);background:rgba(255,102,0,.08)}
+.cs-nav button:disabled{opacity:.3;cursor:default;border-color:var(--line);background:transparent}
+.cs-trilho{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;margin-top:34px;padding-bottom:4px;scrollbar-width:none}
+.cs-trilho::-webkit-scrollbar{display:none}
+.cs-slide{flex:0 0 100%;scroll-snap-align:start;display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center;border:1px solid var(--line);border-radius:20px;padding:28px;background:rgba(255,255,255,.02)}
+.cs-vit{position:relative;aspect-ratio:1/.88}
+.cs-vit figure{position:absolute;margin:0;border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;background:#0b0b0d;box-shadow:0 24px 50px rgba(0,0,0,.6)}
+.cs-vit img{display:block;width:100%;height:auto}
+.cs-vit .v-site{left:0;top:2%;width:80%;transform:rotate(-2deg)}
+.cs-vit .v-insta{right:0;top:30%;width:52%;transform:rotate(2.5deg);border-color:rgba(255,102,0,.5)}
+.cs-vit .v-msg{left:5%;top:44%;width:30%;transform:rotate(-3deg)}
+.cs-vit figcaption{position:absolute;right:10px;bottom:10px;font-family:var(--display);letter-spacing:.08em;font-size:.8rem;padding:4px 10px;border-radius:999px;background:rgba(5,5,5,.8);border:1px solid rgba(255,255,255,.16)}
+.cs-rot{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:700;margin:0 0 6px}
+.cs-txt{margin:0 0 18px;color:var(--muted)}
+.cs-lista{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
+.cs-lista li{position:relative;padding-left:22px;color:var(--muted)}
+.cs-lista li b{color:var(--text)}
+.cs-lista li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;border-radius:2px;background:var(--orange);transform:rotate(45deg)}
+.cs-nome{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.4rem);letter-spacing:.01em;margin:0}
+.cs-oq{color:var(--muted);margin:6px 0 22px}
+.cs-slide blockquote{margin:0 0 22px;font-size:clamp(1.15rem,2vw,1.4rem);font-weight:600;line-height:1.4;border-left:3px solid var(--orange);padding-left:16px}
+.cs-slide blockquote small{display:block;margin-top:8px;font-size:.85rem;font-weight:500;color:var(--muted)}
+.cs-slide .btn{border-radius:999px}
+.cs-prox{grid-template-columns:1fr;text-align:center;justify-items:center;min-height:360px;background:radial-gradient(ellipse 60% 80% at 50% 120%,rgba(255,102,0,.16),transparent 70%),rgba(255,255,255,.02)}
+.cs-prox h3{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);margin:0;line-height:1.05}
+.cs-prox p{color:var(--muted);max-width:440px;margin:12px auto 24px}
+.cs-pontos{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.cs-pontos i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
+.cs-pontos i.on{background:var(--orange);width:22px;border-radius:8px}
+@media(max-width:860px){.cs-slide{grid-template-columns:1fr;padding:18px;gap:22px}.cs-nav button{width:46px;height:46px}}
 </style><link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -579,6 +615,53 @@ header .nav>.btn{border-radius:999px;padding:18px 30px;text-transform:uppercase;
       </div>
     </div>
   </section>
+
+  <section id="case" aria-labelledby="case-t">
+    <div class="wrap">
+      <div class="cs-topo">
+        <div><p class="pill">Resultado real</p>
+        <h2 id="case-t">Quem já<br>trabalha <span class="o">com a gente</span></h2></div>
+        <div class="cs-nav"><button type="button" id="cs-ant" aria-label="Case anterior">&#8249;</button><button type="button" id="cs-prox" aria-label="Próximo case">&#8250;</button></div>
+      </div>
+      <div class="cs-trilho" id="cs-trilho">
+        <article class="cs-slide">
+          <div class="cs-vit">
+            <figure class="v-site"><img src="/cases/caes-gatos-site.webp" alt="Site da Cães e Gatos feito pela Vision" width="1200" height="600" loading="lazy"><figcaption>SITE</figcaption></figure>
+            <figure class="v-insta"><img src="/cases/caes-gatos-depois.webp" alt="Instagram novo da Cães e Gatos" width="720" height="720" loading="lazy"><figcaption>INSTAGRAM</figcaption></figure>
+            <figure class="v-msg"><img src="/cases/caes-gatos-msg.webp" alt="Mensagem da cliente no WhatsApp" loading="lazy"></figure>
+          </div>
+          <div>
+            <h3 class="cs-nome">Cães e Gatos SCS</h3>
+            <p class="cs-oq">Clínica veterinária e pet shop em Santa Cruz do Sul, desde 1999</p>
+            <p class="cs-rot">O desafio</p>
+            <p class="cs-txt">Mais de 25 anos de clínica, mas o Instagram não mostrava isso: logo antiga, posts sem padrão e nada que passasse confiança para quem chegava pela primeira vez.</p>
+            <p class="cs-rot">O que fizemos</p>
+            <ul class="cs-lista">
+              <li><b>Identidade visual nova:</b> logos, cores e um padrão para todos os posts</li>
+              <li><b>Instagram reorganizado:</b> bio, destaques e posts com a cara da clínica</li>
+              <li><b>Site próprio:</b> serviços, história e agendamento direto pelo WhatsApp</li>
+            </ul>
+            <blockquote>“Ficou incrível! Era exatamente isso que eu queria.”<small>Cães e Gatos SCS, quando viu tudo pronto</small></blockquote>
+            <a class="btn ghost" href="https://caesegatosscs.com.br/" target="_blank" rel="noopener">Ver o site deles →</a>
+          </div>
+        </article>
+        <article class="cs-slide cs-prox">
+          <h3>O próximo case<br>pode ser <span class="o">o seu</span></h3>
+          <p>Peça o diagnóstico gratuito e veja o que dá para melhorar na sua empresa.</p>
+          <a class="btn" href="/diagnostico/">Pedir diagnóstico gratuito</a>
+        </article>
+      </div>
+      <div class="cs-pontos" id="cs-pontos" aria-hidden="true"></div>
+    </div>
+  </section>
+  <script>
+  (function(){var t=document.getElementById('cs-trilho');if(!t)return;var sl=t.children,ant=document.getElementById('cs-ant'),pro=document.getElementById('cs-prox'),pt=document.getElementById('cs-pontos');
+  for(var k=0;k<sl.length;k++)pt.appendChild(document.createElement('i'));
+  function atual(){return Math.round(t.scrollLeft/(sl[0].offsetWidth+22));}
+  function marca(){var n=atual();ant.disabled=n<=0;pro.disabled=n>=sl.length-1;for(var k=0;k<pt.children.length;k++)pt.children[k].className=k===n?'on':'';}
+  function vai(d){var n=Math.max(0,Math.min(sl.length-1,atual()+d));t.scrollTo({left:sl[n].offsetLeft-sl[0].offsetLeft,behavior:'smooth'});}
+  ant.onclick=function(){vai(-1)};pro.onclick=function(){vai(1)};t.addEventListener('scroll',function(){clearTimeout(t._m);t._m=setTimeout(marca,60)});marca();})();
+  </script>
 
   <section id="como-trabalha">
     <div class="wrap">
