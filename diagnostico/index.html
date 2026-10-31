@@ -427,6 +427,21 @@ footer{padding:0}
   .fm-top .wrap{min-height:92px;padding:0;gap:28px;background:transparent;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid rgba(255,102,0,.35)}
 }
 @media(max-width:1100px){.fm-top .fm-btn{padding:10px 14px;font-size:.72rem;letter-spacing:.03em;border-radius:999px;margin-left:auto}}
+
+/* diagnóstico: formulário à esquerda (bolinhas) + texto à direita (degradê) (31/10/2026) */
+.fm{padding:0}
+.fm .wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:none;width:100%;padding:0;align-items:stretch;min-height:calc(100vh - 92px)}
+.fm .card{background:transparent;border:0;box-shadow:none;border-radius:0;padding:64px 64px 64px max(24px,calc((100vw - 1180px)/2));display:flex;flex-direction:column;justify-content:center}
+.fm .card form,.fm .card .ok{width:100%;max-width:520px;margin-left:auto}
+.fm .card form>h2{display:none}
+.fm .card form>.sub{font-size:1.05rem;color:#fff;font-weight:600;margin-top:0}
+.fm .fm-txt{background:radial-gradient(90% 70% at 100% 100%,rgba(255,102,0,.32),transparent 65%),#0b0b0b;border-left:1px solid rgba(255,102,0,.3);padding:64px max(24px,calc((100vw - 1180px)/2)) 64px 64px;display:flex;flex-direction:column;justify-content:center}
+.fm .fm-txt h1{font-size:clamp(2.6rem,4.2vw,4.2rem)}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px;max-width:560px}
+.nums div{border:1px solid #262626;border-radius:18px;padding:20px 18px;background:rgba(5,5,5,.6)}
+.nums b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(2rem,2.6vw,2.6rem);line-height:1;color:var(--orange)}
+.nums span{display:block;color:var(--muted);font-size:.86rem;margin-top:8px;line-height:1.35}
+@media(max-width:860px){.fm .wrap{grid-template-columns:minmax(0,1fr);min-height:0}.fm .fm-txt{order:-1;border-left:0;border-bottom:1px solid rgba(255,102,0,.3);padding:40px 20px}.fm .card{padding:32px 20px 56px}.fm .card form,.fm .card .ok{margin:0 auto}.fm .card{width:100%;min-width:0;box-sizing:border-box}.fm .card form{min-width:0}.fm .card .duas{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.nums{gap:8px}.nums div{padding:14px 10px}}
 </style>
 
 <header class="fm-top">
@@ -439,16 +454,6 @@ footer{padding:0}
 
 <main class="fm" id="topo">
   <div class="wrap">
-    <div class="fm-txt">
-      <p class="fm-n">Diagnóstico gratuito</p>
-      <h1>Descubra onde a sua empresa <span class="o">perde cliente</span>.</h1>
-      <p class="fm-s">Preencha os seus dados. A Vision olha o seu Instagram, o seu Google e o seu atendimento e te liga para mostrar, em 10 minutos, por onde começar.</p>
-      <ul class="vant">
-        <li><b>✓</b><span><strong>Gratuito.</strong> Você não paga nada e não assina nada.</span></li>
-        <li><b>✓</b><span><strong>Rápido.</strong> Leva menos de 1 minuto para preencher.</span></li>
-        <li><b>✓</b><span><strong>Sem compromisso.</strong> Você vê o que encontramos e decide se quer seguir.</span></li>
-      </ul>
-    </div>
 
     <div class="card">
       <form id="fm" novalidate>
@@ -481,6 +486,12 @@ footer{padding:0}
         <h2>Recebemos!</h2>
         <p>A gente te liga em até 24 horas, das 8h às 19h.</p>
       </div>
+    </div>
+    <div class="fm-txt">
+      <p class="fm-n">Diagnóstico gratuito</p>
+      <h1>Descubra onde a sua empresa <span class="o">perde cliente</span>.</h1>
+      <p class="fm-s">Preencha os seus dados. A Vision olha o seu Instagram, o seu Google e o seu atendimento e te liga para mostrar, em 10 minutos, por onde começar.</p>
+      <div class="nums"><div><b>1 min</b><span>para preencher</span></div><div><b>24h</b><span>para a gente te ligar</span></div><div><b>10 min</b><span>de conversa, sem compromisso</span></div></div>
     </div>
   </div>
 </main>
