@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Miniatura da busca: o Google não pode usar fotos dos sócios nem a arte com fotos
+User-agent: Googlebot-Image
+Disallow: /socios/
+Disallow: /previa.png
+
 Sitemap: https://assessoriavision.com/sitemap.xml
