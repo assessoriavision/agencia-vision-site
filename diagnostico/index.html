@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Diagnóstico gratuito | Assessoria Vision</title>
 <meta name="description" content="Descubra onde a sua empresa está perdendo cliente. Preencha seus dados e a Vision te liga em até 24 horas para mostrar, em 10 minutos, por onde começar. Gratuito.">
 <meta name="theme-color" content="#050505">
@@ -529,14 +530,14 @@ footer{padding:0}
         <h2>Fale com a <span class="o">Vision</span></h2>
         <p class="sub">Preencha e a gente te liga em até 24 horas.</p>
         <label for="f-nome">Nome</label>
-        <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome">
+        <input id="f-nome" name="nome" type="text" autocomplete="name" maxlength="80" placeholder="Seu nome">
         <label for="f-zap">WhatsApp</label>
-        <div class="phone"><span aria-hidden="true">BR +55</span><input id="f-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(51) 00000-0000"></div>
+        <div class="phone"><span aria-hidden="true">BR +55</span><input id="f-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="(51) 00000-0000"></div>
         <label for="f-emp">Nome da empresa</label>
-        <input id="f-emp" name="empresa" type="text" autocomplete="organization" placeholder="Ex.: Padaria Pão Quente">
+        <input id="f-emp" name="empresa" type="text" autocomplete="organization" maxlength="100" placeholder="Ex.: Padaria Pão Quente">
         <div class="duas">
-          <div><label for="f-insta">Instagram da empresa</label><input id="f-insta" name="instagram" type="text" autocomplete="off" placeholder="@suaempresa"></div>
-          <div><label for="f-site">Site <small>(se tiver)</small></label><input id="f-site" name="site" type="text" inputmode="url" autocomplete="url" placeholder="www.suaempresa.com.br"></div>
+          <div><label for="f-insta">Instagram da empresa</label><input id="f-insta" name="instagram" type="text" autocomplete="off" maxlength="60" placeholder="@suaempresa"></div>
+          <div><label for="f-site">Site <small>(se tiver)</small></label><input id="f-site" name="site" type="text" inputmode="url" autocomplete="url" maxlength="150" placeholder="www.suaempresa.com.br"></div>
         </div>
         <label for="f-seg">Segmento</label>
         <select id="f-seg" name="segmento" required>
@@ -544,6 +545,7 @@ footer{padding:0}
           <option>Alimentação e restaurantes</option><option>Saúde e bem-estar</option><option>Beleza e estética</option>
           <option>Pet shop e veterinária</option><option>Comércio e lojas</option><option>Serviços</option><option>Indústria</option><option>Outro</option>
         </select>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="f-hp">Não preencha</label><input id="f-hp" name="empresa_site2" type="text" tabindex="-1" autocomplete="off"></div>
         <p class="erro" id="f-erro" aria-live="polite"></p>
         <button class="btn" id="f-btn" type="submit">Quero o diagnóstico →</button>
         <p class="priv-n">Ao enviar, você concorda com a <a href="#privacidade" class="open-priv">Política de privacidade</a>.</p>
@@ -570,17 +572,25 @@ var VISION_PLANILHA='https://script.google.com/macros/s/AKfycbxO8jw4FL8xbb9kzcLs
 (function(){
   var f=document.getElementById('fm'),er=document.getElementById('f-erro'),bt=document.getElementById('f-btn');
   function v(id){return (document.getElementById(id).value||'').trim();}
+  var t0=Date.now();
+  /* Proteção contra robôs: campo invisível (só robô preenche), tempo mínimo de preenchimento e limite de envios por aparelho. */
+  function falsoOk(){f.style.display='none';document.getElementById('f-ok').classList.add('on');window.scrollTo(0,0);}
   f.addEventListener('submit',function(e){
     e.preventDefault();
+    if(v('f-hp')||Date.now()-t0<3000){falsoOk();return;}
+    var hist=[];try{hist=JSON.parse(localStorage.getItem('vision_envios')||'[]').filter(function(t){return Date.now()-t<36e5;});}catch(x){}
+    if(hist.length>=3){er.textContent='Recebemos os seus pedidos. A gente te liga em até 24 horas.';return;}
     var d={nome:v('f-nome'),whatsapp:v('f-zap'),email:'',empresa:v('f-emp'),instagram:v('f-insta'),site:v('f-site'),segmento:v('f-seg')};
-    if(!d.nome){er.textContent='Coloque o seu nome.';return;}
-    if(d.whatsapp.replace(/\D/g,'').length<10){er.textContent='Coloque o WhatsApp com DDD.';return;}
+    if(d.nome.replace(/[^A-Za-zÀ-ÿ]/g,'').length<2){er.textContent='Coloque o seu nome.';return;}
+    var zd=d.whatsapp.replace(/\D/g,'');if(zd.length>11&&zd.indexOf('55')===0)zd=zd.slice(2);
+    if(zd.length<10||zd.length>11){er.textContent='Coloque um WhatsApp válido, com DDD.';return;}
     if(!d.empresa){er.textContent='Coloque o nome da empresa.';return;}
     if(!d.segmento){er.textContent='Escolha o segmento.';return;}
     er.textContent='';
     function pronto(){if(window.fbq)fbq('track','Lead');if(window.gtag)gtag('event','generate_lead',{form:'diagnostico'});f.style.display='none';document.getElementById('f-ok').classList.add('on');window.scrollTo(0,0);setTimeout(function(){location.href='/obrigado/';},700);}
     if(!VISION_PLANILHA){er.textContent='Não conseguimos enviar agora. Tente de novo em alguns minutos.';return;}
     bt.disabled=true;bt.textContent='Enviando...';
+    hist.push(Date.now());try{localStorage.setItem('vision_envios',JSON.stringify(hist));}catch(x){}
     var fd=new URLSearchParams(d);fd.append('pagina',location.href);
     fetch(VISION_PLANILHA,{method:'POST',mode:'no-cors',body:fd}).then(pronto).catch(function(){
       bt.disabled=false;bt.textContent='Quero o diagnóstico →';er.textContent='Não conseguimos enviar. Confira a internet e tente de novo.';
